@@ -1,11 +1,10 @@
-service: java-examples
+service: java-examples-nodebotanist
 
 provider:
   name: aws
   runtime: java8
   stage: master
   region: us-west-2
-  role: ${env:IAM_ROLE}
 
 package:
   artifact: target/iopipe-examples-master.jar
@@ -14,7 +13,8 @@ functions:
   Hello:
     handler: com.iopipe.examples.Hello
     environment:
-      IOPIPE_TOKEN: ${env:IOPIPE_TOKEN}
+      IOPIPE_TOKEN: test
+      IOPIPE_ENABLE_PROFILING: true
     events:
       - schedule:
           rate: rate(5 minutes)
